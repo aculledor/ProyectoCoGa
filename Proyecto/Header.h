@@ -1,22 +1,64 @@
 #pragma once
-
+ 
+/*Tamañonho de ventana
+ */
 #define W_WIDTH 1000
 #define W_HEIGHT 1000
-#define TAMCUBO 0.6f
+
+/*Variables globales
+*/
 #define INCREMENTO .01
-#define DISTANCIA 10
 #define PI 3.1416
-#define FOV 45.0f
 #define GradosToRadianes 0.017453f
-#define ANGFOCO 30
-#define FRAMESUELO 15
-#define TAMCHARCO 1.5f
-#define ANCHOSUELO 20.0f
-#define LARGOSUELO 40.0f
+
+/*Variables de la camara
+*/
+#define FOV 45.0f
+
+/*Variables de las luces
+*/
+#define ANGFOCO 45.0f
+
+/*Pared
+*/
 #define ALTOPARED .9f
 #define LARGOPARED 40.0f
-#define TAMPELOTA 0.5f
+
+/*Cielo
+*/
 #define TAMCIELO 50.0f
+
+/*Suelo
+*/
+#define ANCHOSUELO 20.0f
+#define LARGOSUELO 40.0f
+
+/*Focos
+*/
+#define XZFOCOS .5f
+#define YFOCOS 5.0f
+
+#define XCABFOCOS 1.5f
+#define YCABFOCOS 1.0f
+#define ZCABFOCOS .1f
+
+/*Tamanho estructura cubo
+*/
+#define TAMCUBO 0.6f
+
+/*Porteria
+*/
+#define XZPALO 0.25f
+#define YPALO 2.5f
+
+#define YZLARGUERO 0.25f
+#define XLARGUERO 5.6f
+
+/*Pelota
+*/
+#define TAMPELOTA 0.25f
+#define ROCERAP 0.00005f
+#define ROCELEN 0.000025f
 
 //Puntos
 typedef struct {
@@ -25,20 +67,13 @@ typedef struct {
 	float z;
 } punto;
 
-//Vectores
+//Pelota movil
 typedef struct {
-	float x;
-	float y;
-	float z;
-} vector;
-
-//Objetos esfericos
-typedef struct {
-	float X;
-	float Z;
-	float translate;
-	float tamanho;
-	float vel_giro;
+	float tam;
+	float velocidad;
+	float angulo;
+	punto posicion;
+	punto rotacionEjes;
 	punto color;
 	int listarender;
 	unsigned int textura;
@@ -46,9 +81,8 @@ typedef struct {
 
 //Cubos
 typedef struct {
-	float X;
-	float Z;
-	float tamanho;
+	punto posicion;
+	punto tamanho;
 	float vel_giro;
 	float aceleracion;
 	float angulo_giro;
@@ -58,15 +92,38 @@ typedef struct {
 	unsigned int textura;
 } cubo;
 
-//Palo
+//Cubo estatico
 typedef struct {
-	float ancho;
-	float alto;
-	float rotacion;
+	punto posicion;
+	float rotY;
+	punto tam;
 	punto color;
 	int listarender;
-	unsigned int texture;
-} staff;
+	unsigned int textura;
+} elemEstatico;
+
+//Obstaculo
+typedef struct {
+	punto posicion;
+	punto limNeg;	//Limite hacia el positivo de los ejes
+	punto limPos;	//Limite hacia el positivo de los ejes
+	float rotY;
+	punto tam;
+	punto color;
+	int listarender;
+	unsigned int textura;
+} obstaculo;
+
+//Luces
+typedef struct {
+	GLfloat posicion[4];
+	GLfloat direccion[4];
+	GLfloat ambiente[4];
+	GLfloat lambert[4];
+	GLfloat phong[4];
+	float	apertura;
+} luz;
+
 
 //Suelo
 typedef struct {
@@ -78,18 +135,13 @@ typedef struct {
 	punto color;
 	int listarender;
 	unsigned int textura;
-	unsigned int imagenes[15];
 } strutSuelo;
 
-void myCamara();
-
-void myTeclado(unsigned char trans, int x, int y);
-void myTeclasespeciales(int cursor, int x, int y);
-void myEjes();
-
+/*-----------------------------------------------------------------------------------
+	Funciones implementadas en Source.cpp
+*/
 int myEsfera();
 int myCubos();
 int mySuelo();
-int myCharco();
 int myParedes();
 int mySueloMC();
