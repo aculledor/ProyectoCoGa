@@ -7,6 +7,9 @@ Ninguna otra parte del código es importada, el resto esta desarrollado por mi d
 y el desarrollo de este proyecto además de los códigos de ejemplos proporcionados por la materia de
 Computación Gráfica.
 
+Se incluye una carpeta "ListaRender" con el codigo para la creacion de las listas de poligonos de
+los muros y el suelo así como los txt con sus resultados.
+
 
 ################
 ## CONTROLES: ##
