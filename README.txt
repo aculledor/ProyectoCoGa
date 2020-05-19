@@ -11,6 +11,17 @@ Se incluye una carpeta "ListaRender" con el codigo para la creacion de las lista
 los muros y el suelo así como los txt con sus resultados.
 
 
+####################
+####################
+####		####
+####   WARNING	#### -> CUIDADO CON EL VOLUMEN DE LA MÚSICA, PUEDE QUE COMIENZA MUY ALTA
+####		####
+####		####
+####################
+####################
+
+
+
 ################
 ## CONTROLES: ##
 ###############################################################################################
